@@ -10,13 +10,15 @@ De asemenea, va mai avea o metoda, play, care va afisa mesajul
 """
 from abc import ABC, abstractmethod
 
-class AbstractVIdeo(ABC):
+class AbstractVideo(ABC):
+
     @abstractmethod
     def show_details(self):
         pass
 
     def play(self):
         print("Video is playing")
+
 """
 2. Defineste o clasa Videoclip.
 Aceasta va implementa clasa abstracta AbstractVideo.
@@ -24,8 +26,8 @@ Va avea atribute in constructor: title, duration.
 Va implementa metoda show_details, in care va afisa mesajul:
 '<title> has a duration of <duration> minutes.'
 """
-class Videoclip(AbstractVIdeo):
-    def __init__(self,title,duration):
+class Videoclip(AbstractVideo):
+    def __init__(self, title, duration):
         self.title = title
         self.duration = duration
 
@@ -57,28 +59,46 @@ care incapsuleaza atributul privat __director.
 """
 class Movie(Videoclip):
 
-def __init__(self, title, duration, genre, director, actors):
-    super().__init__(title, duration)
-    self.genre = genre
-    self.__director = director
-    self.actors = actors
+    def __init__(self, title, duration, genre, director, actors):
+        super().__init__(title, duration)
+        self.genre = genre
+        self.__director = director
+        self.actors = actors
+
+    def show_details(self):
+        super().show_details()
+        print(f'Is directed by {self.__director} and the actors are {", ".join(self.actors)}.')
+
+    @property
+    def director(self):
+        return self.__director
+
+    @director.getter
+    def director(self):
+        print('get')
+        return self.__director
+
+    @director.setter
+    def director(self, value):
+        print("set")
+        self.__director = value
+
+    @director.deleter
+    def director(self):
+        print("del")
+        del self.__director
 
 
-def show_details(self):
-    super().show_details()
-    print(f'Is directed by {self.__director} and the actors are {", ".join(self.actors)}.')
+movie1 = Movie("topgun", 120, "action", "john doe", ['actor1', 'actor2'])
+print(movie1.title)
+print(movie1.duration)
+print(movie1.genre)
+print(movie1.actors)
+movie1.show_details()
+print('===========')
 
 
-@property
-def director(self):
-    return self.__director
+movie1.director = "nick doe"
+print(movie1.director)
 
-
-@director.setter
-def director(self, new_director):
-    self.__director = new_director
-
-
-@director.deleter
-def director(self):
-    del self.__director
+del movie1.director
