@@ -46,6 +46,7 @@ class User:
         self.username = username
         self.email = email
         self.__password = None
+        self.aranjare = []
 
     @property
     def password(self):
@@ -57,16 +58,20 @@ class User:
     @password.setter
     def password(self, value):
         if len(value) < 10:
-            print("Parola trebuie sa aiba minim 10 caractere.")
+            self.aranjare.append("Parola trebuie sa aiba minim 10 caractere.")
         elif not any(c.isupper() for c in value):
-            print("Parola trebuie sa contina cel putin o litera mare.")
+            self.aranjare.append("Parola trebuie sa contina cel putin o litera mare.")
         else:
             self.__password = value
     def login(self):
         if self.username and self.email and self.__password:
             print("Conectat")
         else:
-            print("Lipsesc credentiale de conectare. Nu va putem conecta")
+            self.aranjare.append("Lipsesc credentiale de conectare. Nu va putem conecta")
+
+    def print_aranjare(self):
+        for aranjaree in self.aranjare:
+            print(aranjaree)
 
 user1 = User("Dorel", "Dorel@yahoo.com")
 user2 = User("Gigel", "Gigel@gmail.com")
@@ -81,16 +86,19 @@ print("Username:", user1.username)
 print("Email:", user1.email)
 print("Password:", user1.password)
 user1.login()
+user1.print_aranjare()
 print("User2:")
 print("Username:", user2.username)
 print("Email:", user2.email)
 print("Password:", user2.password)
 user2.login()
+user2.print_aranjare()
 print("User3:")
 print("Username:", user3.username)
 print("Email:", user3.email)
 print("Password:", user3.password)
 user3.login()
+user3.print_aranjare()
 
 
 
