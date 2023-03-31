@@ -73,6 +73,7 @@ class User:
         for aranjaree in self.aranjare:
             print(aranjaree)
 
+
 user1 = User("Dorel", "Dorel@yahoo.com")
 user2 = User("Gigel", "Gigel@gmail.com")
 user3 = User("Ion", "Ion@yahoo.com")
@@ -123,3 +124,90 @@ Angajatul x lucreaza de y ani.
 
 d. Creeaza proprietatea salary care sa incapsuleze atributul privat salary.
 """
+
+from abc import ABC, abstractmethod
+
+
+class Person(ABC):
+    @abstractmethod
+    def wake_up(self):
+        pass
+
+    @abstractmethod
+    def sleep(self):
+        pass
+
+    @abstractmethod
+    def eat(self):
+        pass
+
+    def describe(self):
+        print("O persoana se trezeste, mananca si doarme.")
+
+
+class Student(Person):
+    def __init__(self, name, university, grade):
+        self.name = name
+        self.university = university
+        self.grade = grade
+
+    def wake_up(self):
+        print(f"Studentul {self.name} se trezeste la ora 7 dimineata.")
+
+    def sleep(self):
+        print(f"Studentul {self.name} se culca la ora 23 noaptea.")
+
+    def eat(self):
+        print(f"Studentul {self.name} mananca 3 mese pe zi.")
+
+    def describe(self):
+        super().describe()
+        print(f"Studentul {self.name}, studiaza la universitatea {self.university} si are nota generala {self.grade}")
+
+
+class Employee(Person):
+
+    def __init__(self, name, experience, salary):
+        self.name = name
+        self.experience = experience
+        self.__salary = salary
+
+    @property
+    def salary(self):
+        return self.__salary
+
+    @salary.setter
+    def salary(self, new_salary):
+        self.__salary = new_salary
+
+
+    def wake_up(self):
+        print(f"Angajatul {self.name} se trezeste la ora 8 dimineata")
+
+    def sleep(self):
+        print(f"Angajatul {self.name} se culca la ora 00:00 noaptea")
+
+    def eat(self):
+        print(f"Angajatul {self.name} mananca 3 mese pe zi")
+
+    def describe(self):
+        super().describe()
+        print(f"Angajatul {self.name}, lucreaza de {self.experience} ani si are un salariu de {self.__salary}")
+
+
+
+
+s1 = Student("Bogdan", "UPB", 10)
+s1.describe()
+s1.wake_up()
+s1.eat()
+s1.sleep()
+
+e1 = Employee("Maria", 5, 4000)
+e1.describe()
+e1.wake_up()
+e1.eat()
+e1.sleep()
+
+e1.salary = 4500
+e1.describe()
