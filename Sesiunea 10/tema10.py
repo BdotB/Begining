@@ -113,6 +113,7 @@ class Login(unittest.TestCase):
         for i, label in enumerate(labels):
             self.assertEqual(label.text, expected_labels[i])
 
+
 # ● Test 10
 # - Completează cu user și pass valide
 # - Click login

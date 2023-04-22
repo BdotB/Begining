@@ -130,6 +130,7 @@ def interact_with_element(element_index):
     elements = driver.find_elements_by_xpath("//a")
     elements[element_index].click()
 
+
 # Interactioneaza cu al 2-lea element din lista de elemente "elements_by_text"
 elements_by_text[1].click()
 
