@@ -142,14 +142,14 @@ class Login(unittest.TestCase):
 # - Click logout
 # - Verifică dacă ai ajuns pe https://the-internet.herokuapp.com/login
     def test_logout(self):
-    self.driver.find_element(By.ID, "username").send_keys("tomsmith")
-    self.driver.find_element(By.ID, "password").send_keys("SuperSecretPassword!")
-    self.driver.find_element(By.CSS_SELECTOR, ".fa-sign-in").click()
+        self.driver.find_element(By.ID, "username").send_keys("tomsmith")
+        self.driver.find_element(By.ID, "password").send_keys("SuperSecretPassword!")
+        self.driver.find_element(By.CSS_SELECTOR, ".fa-sign-in").click()
     # Verifică ca noul url CONTINE /secure
-    self.assertIn('/secure', self.driver.current_url)
-    self.driver.find_element(By.CSS_SELECTOR, ".icon-2x.icon-signout").click()
+        self.assertIn('/secure', self.driver.current_url)
+        self.driver.find_element(By.CSS_SELECTOR, ".icon-2x.icon-signout").click()
     # Verifică dacă ai ajuns pe https://the-internet.herokuapp.com/login
-    self.assertEqual(self.driver.current_url, "https://the-internet.herokuapp.com/login")
+        self.assertEqual(self.driver.current_url, "https://the-internet.herokuapp.com/login")
 
 # OPTIONAL - grad de dificultate: Mediu spre greu: may need Google
 # ● Test 12 - brute force password hacking
